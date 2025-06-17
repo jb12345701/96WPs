@@ -1,22 +1,24 @@
-#to create a plate layout from a csv containing a list of samples and their well locations 
+#To create a plate layout from a csv containing a list of samples
+#This code works with any .csv file where one column is named 'Well' and the well numbering is in A01 (not A1) format, the prompt will print the layout of any sample in your table formatted as a 96 well plate
 
 #import pandas
 import pandas as pd
 
 #load the csv
-input_file = "list_to_layout.csv"
+input_file = "list_to_layout_A1.csv"
 df = pd.read_csv(input_file)
 
 #create an empty 8x12 plate layout
 rows = list("ABCDEFGH")
-cols = [f"{i:02}" for i in range(1,13)] 
-plate = pd.DataFrame("", index=rows, columns=cols
+cols = [str(i) for i in range(1, 13)]
+#str converts each number i into a string 
+plate = pd.DataFrame("", index=rows, columns=cols)
 plate
 
 #populate the plate 
-for _, row in df.iterrows(): 
+for _, row in df.iterrows():
     if pd.isna(row["Well"]) or pd.isna(row["Sample"]):
-        continue
+        continue  # skip incomplete rows
 
     well = str(row["Well"]).strip().upper()
     sample = str(row["Sample"]).strip()
