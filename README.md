@@ -1,1 +1,1 @@
-This repo is a set of tools designed to work with plate layouts for 96 well plates for common data transformations for lab scientists
+This repo is a set of tools designed for automating common scientific lab processes. Scripts within this repo perform common data transformations and simple data analysis from established assays
